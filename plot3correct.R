@@ -1,14 +1,16 @@
 ##R code for plot3
 setwd("E:/statistics/coursera/repository/exploratorydataanalysis/project1")
+##I ommitted the downloading and unzipping process here because the household_power_consumption.txt  
+##already exists in the working directory due to plot1 generation.
 alldata<-read.csv2("household_power_consumption.txt")
 alldata$Date<-as.Date(as.character(alldata$Date),format="%d/%m/%Y")
 subsetdata<-alldata[alldata$Date=="2007-2-1"|alldata$Date=="2007-2-2",]
-x<-character()
 x<-paste(as.character(subsetdata$Date),as.character(subsetdata$Time),sep=",")
 subsetdata$Time<-as.POSIXct(strptime(x,"%Y-%m-%d,%H:%M:%S"))
 y<-(strptime(x,"%Y-%m-%d,%H:%M:%S"))$wday
 z<-length(y[y==4])
 m<-z+1
+##change the three variables Sub_metering_1,2,3 from factor class into numeric class
 subsetdata$Sub_metering_1<-as.numeric(levels(subsetdata$Sub_metering_1)[subsetdata$Sub_metering_1])
 subsetdata$Sub_metering_2<-as.numeric(levels(subsetdata$Sub_metering_2)[subsetdata$Sub_metering_2])
 subsetdata$Sub_metering_3<-as.numeric(levels(subsetdata$Sub_metering_3)[subsetdata$Sub_metering_3])
