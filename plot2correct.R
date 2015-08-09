@@ -1,10 +1,11 @@
 ##R code for plot2
 setwd("E:/statistics/coursera/repository/exploratorydataanalysis/project1")
+##I ommitted the downloading and unzipping process here because the household_power_consumption.txt  
+##already exists in the working directory due to plot1 generation.
 alldata<-read.csv2("household_power_consumption.txt")
 alldata$Date<-as.Date(as.character(alldata$Date),format="%d/%m/%Y")
 subsetdata<-alldata[alldata$Date=="2007-2-1"|alldata$Date=="2007-2-2",]
 subsetdata$Global_active_power<-as.numeric(as.character(subsetdata$Global_active_power))
-x<-character()
 x<-paste(as.character(subsetdata$Date),as.character(subsetdata$Time),sep=",")
 subsetdata$Time<-as.POSIXct(strptime(x,"%Y-%m-%d,%H:%M:%S"))
 y<-(strptime(x,"%Y-%m-%d,%H:%M:%S"))$wday
